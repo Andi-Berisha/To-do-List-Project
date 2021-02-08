@@ -27,7 +27,7 @@ import org.hibernate.annotations.OnDeleteAction;
 		
 		@Column String user_password;
 		
-		@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+		@OneToMany(mappedBy = "User", fetch = FetchType.EAGER)
 		@OnDelete(action = OnDeleteAction.CASCADE)
 		private List<TaskDomain> tasks;
 
