@@ -4,7 +4,7 @@ package com.qa.starterproject.persistence.dtos;
 public class TaskDTO {
 	
 	
-	private Long id;
+//	private Long id; protected as it is unnecessary data.
 	
 
 	private String task_name;
@@ -21,22 +21,14 @@ public class TaskDTO {
 	}
 
 
-public TaskDTO(Long id, String task_name, Boolean hasTaskBeenCompletedCheck) {
+public TaskDTO(String task_name, Boolean hasTaskBeenCompletedCheck) {
 	super();
-	this.id = id;
+	
 	this.task_name = task_name;
 	this.hasTaskBeenCompletedCheck = hasTaskBeenCompletedCheck;
 }
 
 
-public Long getId() {
-	return id;
-}
-
-
-public void setId(Long id) {
-	this.id = id;
-}
 
 
 public String getTask_name() {
