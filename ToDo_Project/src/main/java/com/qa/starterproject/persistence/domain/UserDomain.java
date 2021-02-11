@@ -25,7 +25,7 @@ import org.hibernate.annotations.OnDeleteAction;
 		@Column
 		private String user_surname;
 		
-		@Column String user_password;
+		
 		
 		@OneToMany(mappedBy = "User", fetch = FetchType.EAGER)
 		@OnDelete(action = OnDeleteAction.CASCADE)
@@ -35,13 +35,13 @@ import org.hibernate.annotations.OnDeleteAction;
 			super();
 		}
 
-		public UserDomain(Long id, String user_name, String user_surname, String user_password,
+		public UserDomain(Long id, String user_name, String user_surname,
 				List<TaskDomain> tasks) {
 			super();
 			this.id = id;
 			this.user_name = user_name;
 			this.user_surname = user_surname;
-			this.user_password = user_password;
+			
 			this.tasks = tasks;
 		}
 
@@ -69,13 +69,7 @@ import org.hibernate.annotations.OnDeleteAction;
 			this.user_surname = user_surname;
 		}
 
-		public String getUser_password() {
-			return user_password;
-		}
-
-		public void setUser_password(String user_password) {
-			this.user_password = user_password;
-		}
+	
 
 		public List<TaskDomain> getTasks() {
 			return tasks;
@@ -92,7 +86,6 @@ import org.hibernate.annotations.OnDeleteAction;
 			result = prime * result + ((id == null) ? 0 : id.hashCode());
 			result = prime * result + ((tasks == null) ? 0 : tasks.hashCode());
 			result = prime * result + ((user_name == null) ? 0 : user_name.hashCode());
-			result = prime * result + ((user_password == null) ? 0 : user_password.hashCode());
 			result = prime * result + ((user_surname == null) ? 0 : user_surname.hashCode());
 			return result;
 		}
@@ -121,11 +114,6 @@ import org.hibernate.annotations.OnDeleteAction;
 					return false;
 			} else if (!user_name.equals(other.user_name))
 				return false;
-			if (user_password == null) {
-				if (other.user_password != null)
-					return false;
-			} else if (!user_password.equals(other.user_password))
-				return false;
 			if (user_surname == null) {
 				if (other.user_surname != null)
 					return false;
@@ -136,11 +124,11 @@ import org.hibernate.annotations.OnDeleteAction;
 
 		@Override
 		public String toString() {
-			return "UserDomain [id=" + id + ", user_name=" + user_name + ", user_surname=" + user_surname
-					+ ", user_password=" + user_password + ", tasks=" + tasks + "]";
+			return "UserDomain [id=" + id + ", user_name=" + user_name + ", user_surname=" + user_surname + ", tasks="
+					+ tasks + "]";
 		}
-		
-		
+
+	
 		
 		
 		
