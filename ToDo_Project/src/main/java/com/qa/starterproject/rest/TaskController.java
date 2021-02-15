@@ -53,7 +53,7 @@ public class TaskController {
 		}
 		
 	// Update
-		@PutMapping("/update")
+		@PutMapping("/update/{id}")
 		public ResponseEntity<TaskDTO> update(@PathVariable("id") Long id, @RequestBody TaskDomain task) {
 			return new ResponseEntity<TaskDTO>(this.service.update(id, task),HttpStatus.ACCEPTED);
 			
