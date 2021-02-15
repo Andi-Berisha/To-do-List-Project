@@ -18,7 +18,7 @@ public class UserDTO {
 
 	public UserDTO() {
 		super();
-	}
+	} 
 
 	public UserDTO(Long id, String user_name, String user_surname, List<TaskDTO> tasks) {
 		super();
