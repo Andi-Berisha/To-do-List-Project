@@ -1,34 +1,39 @@
-'use strict';
+let div = document.getElementById("data");
+let status = document.getElementById("status");
 
 
-const parameters = new URLSearchParams(window.location.search);
+document
+    .querySelector("form.viewRecordUser")
+    .addEventListener("submit", function (stop) {
+        stop.preventDefault();
+        let id = document.getElementById("newUserName").value;
 
-// Obtains ID and passes it as a parameter to getData()
-for (let param of params) {
-    console.log("Object ID: " + param)
-    let id = param[1];
-    console.log(id);
-    getData(id)
-}
+        console.log(id)
+
+        sendData(id)
+    });
 
 
-
-function getData(id) {
+function sendData(id) {
     fetch('http://localhost:8081/user/read/' + id)
         .then(
             function (response) {
                 if (response.status !== 200) {
                     console.log('A problem was encountered. Status Code: ' +
                         response.status);
+                    let p = document.createElement("p")
+                    p.innerText = "User not found, try again"
+                    status.appendChild(p)
                     return;
                 }
 
                 response.json().then(function (data) {
-                    console.log("MY DATA OBJ", data)
+                    // console.log("MY DATA OBJ", data)
 
-                    document.querySelector("input#id").value = data.id
-                    document.querySelector("input#user_name").value = data.user_name
-
+                    // document.querySelector("input#id").value = data.id
+                    // document.querySelector("input#user_name").value = data.user_name
+                    console.log(data)
+                    displayData(data)
 
 
                 });
@@ -40,25 +45,36 @@ function getData(id) {
 }
 
 
-document
-    .querySelector("form.viewRecordUser")
-    .addEventListener("submit", function (stop) {
-        stop.preventDefault();
-        let formElements = document.querySelector("form.viewRecord").elements;
-        console.log(formElements)
+function displayData(data) {
+    div.innerText = ''
 
-        let id = formElements["id"].value;
-        let user_name = formElements["user_name"].value;
-        let user_surname = formElements["user_surname"].value;
+    let name = document.createElement("p")
+    let surname = document.createElement("p")
 
 
-        let data = {
-            "id": id,
-            "user_name": user_name
+    name.innerText = data.user_name;
+    surname.innerText = data.user_surname;
 
-        }
-        console.log("Data to post", data)
-        console.log(id)
 
-        sendData(data, id)
-    });
+    let listOfTasks = document.createElement("ul");
+
+    for (let i = 0; i < data.tasks.length; i++) {
+        let task = document.createElement("li")
+        let isComplete = document.createElement("li")
+
+        // Add string literals later
+        task.innerText = data.tasks[i].task_name;
+        isComplete.innerText = `Completed: ${data.tasks[i].hasTaskBeenCompletedCheck}`;
+
+        listOfTasks.appendChild(task)
+        listOfTasks.appendChild(isComplete)
+
+    }
+
+    div.appendChild(name)
+    div.appendChild(surname)
+    div.appendChild(listOfTasks)
+
+
+
+}

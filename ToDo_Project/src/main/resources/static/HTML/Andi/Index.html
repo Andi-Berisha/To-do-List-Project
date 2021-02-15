@@ -27,12 +27,30 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="create.html">Create User</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="createTask.html">Create Task</a>
+                </li>
+
+
+                <li class="nav-item">
                     <a class="nav-link" href="ReadUser.html">Read User Tasks</a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link" href="Update.html">Update</a>
+                    <a class="nav-link" href="Update.html">Update User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="updateTask.html">Update Task</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="delete.html">Delete User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="deleteTask.html">Delete Task</a>
                 </li>
 
 
@@ -49,94 +67,17 @@
 
 
     <div class="container">
+        <div id="read"></div>
+    </div>
 
 
-        <h1>Create User:</h1>
-
-        <div id="createFormUser">
-            <!-- Search Bar -->
-            <form action="post" class="viewRecordUser">
-                <div class="form-group">
-                    <label for="Name">User Name</label>
-                    <input type="text" value="" class="form-control" placeholder="Enter the name of the new User"
-                        id="newUserName">
-
-                    <label for="Surname">User Surname</label>
-                    <input type="text" value="" class="form-control" placeholder="Enter the surname of the new User"
-                        id="newUserName">
-                    <br>
-
-                    <button type="" class="btn btn-secondary" value="update">Create</button>
-                </div>
-
-
-                <h1>Delete User:</h1>
-
-                <div id="createFormDeleteUser">
-                    <!-- Search Bar -->
-                    <form action="post" class="viewRecordUser">
-                        <div class="form-group">
-                            <label for="Todo">User ID Entry</label>
-                            <input type="text" value="" class="form-control"
-                                placeholder="Enter the ID of the User which you wish to delete" id="name">
-                            <br>
-                            <button type="" class="btn btn-secondary" value="update">Delete</button>
-                        </div>
-                    </form>
-                </div>
-
-
-
-                <h1>Create To-do Task:</h1>
-
-                <div id="createFormTask">
-                    <!-- Search Bar -->
-                    <form action="post" class="viewRecordTask">
-                        <div class="form-group">
-                            <label for="Todo">To-Do Task</label>
-                            <input type="text" value="" class="form-control" placeholder="Enter Task Name" id="name">
-
-                            <label for="User ID">User ID</label>
-                            <input type="text" value="" class="form-control"
-                                placeholder="Enter an existing User ID to append the task too" id="personName">
-                            <br>
-                            <button type="" class="btn btn-secondary" value="update">Create</button>
-                        </div>
-                    </form>
-                </div>
-
-
-                <h1>Delete To-Do Task:</h1>
-
-                <div id="createFormDelete">
-                    <!-- Search Bar -->
-                    <form action="post" class="viewRecord">
-                        <div class="form-group">
-                            <label for="Todo">To-Do Entry</label>
-                            <input type="text" value="" class="form-control"
-                                placeholder="Enter the ID of the task which you wish to delete" id="name">
-                            <br>
-                            <button type="" class="btn btn-secondary" value="update">Delete</button>
-                        </div>
-                    </form>
-                </div>
-
-
-
-
-
-
-
-                <h1>List of all To-Do Entries</h1>
-                <div class="card" id="card"></div>
-
-
-                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                    crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-                    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-                    crossorigin="anonymous"></script>
+    <script src="/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
