@@ -34,18 +34,18 @@ public class UserServiceUnitTest {
 
 	@Test
 	public void create() {
-		// Resources
+		// Resources employed
 		UserDomain exampleUser = new UserDomain(1L, "Bob", "James", null);
 		UserDTO userDto = new UserDTO(1L, "Bob", "James", null);
 
-		// Rules
+		// Rules set
 		Mockito.when(this.mockedRepo.save(Mockito.any(UserDomain.class))).thenReturn(exampleUser);
 		Mockito.when(this.mapper.map(exampleUser, UserDTO.class)).thenReturn(userDto);
 
-		// Actions
+		// Actions performed 
 		UserDTO result = this.service.create(exampleUser);
 
-		// Assertions
+		// Assertions made
 		Assertions.assertThat(result).isNotNull();
 		Assertions.assertThat(result).isEqualTo(userDto);
 		Assertions.assertThat(result).usingRecursiveComparison().isEqualTo(userDto);
@@ -57,17 +57,17 @@ public class UserServiceUnitTest {
 
 	@Test
 	public void readById() {
-		// Resources
+		// Resources Employed
 		UserDomain exampleUser = new UserDomain(1L, "Bob", "James", null);
 		UserDTO userDto = new UserDTO(1L, "Bob", "James", null);
 
-		// Rules
+		// Rules set
 		Mockito.when(this.mapper.map(exampleUser, UserDTO.class)).thenReturn(userDto);
 		Mockito.when(this.mockedRepo.findById(exampleUser.getId())).thenReturn(Optional.of(exampleUser));
-		// Actions
+		// Actions performed
 		UserDTO result = this.service.readById(1L);
 
-		// Assertions
+		// Assertions made
 		Assertions.assertThat(result).isEqualTo(userDto);
 		Mockito.verify(this.mockedRepo, Mockito.times(1)).findById(1L);
 	}
@@ -76,7 +76,7 @@ public class UserServiceUnitTest {
     
 	@Test
 	public void readAll() {
-		// RESOURCES 
+		// Resources Employed
 		UserDomain exampleUserA = new UserDomain(1L, "Bob", "James", null);
 		UserDomain exampleUserB = new UserDomain(1L, "Danny", "Philips", null);
 		List<UserDomain> UserDomainList = new ArrayList<>();
@@ -89,15 +89,15 @@ public class UserServiceUnitTest {
 		UserListDto.add(userDtoA);
 		UserListDto.add(userDtoB);
 
-		// RULES
+		// Rules set
 		Mockito.when(this.mapper.map(exampleUserA, UserDTO.class)).thenReturn(userDtoA);
 		Mockito.when(this.mapper.map(exampleUserB, UserDTO.class)).thenReturn(userDtoB);
 		Mockito.when(this.mockedRepo.findAll()).thenReturn(UserDomainList);
 
-		// ACTIONS 
+		// Actions performed
 		List<UserDTO> result = this.service.readAll();
 
-		// ASSERTIONS
+		// Assertions made
 		Assertions.assertThat(result).isNotNull();
 		Assertions.assertThat(result).isEqualTo(UserListDto);
 		Assertions.assertThat(result).usingRecursiveComparison().isEqualTo(UserListDto);
@@ -105,19 +105,46 @@ public class UserServiceUnitTest {
 		Mockito.verify(this.mapper, Mockito.times(1)).map(exampleUserA, UserDTO.class);
 		Mockito.verify(this.mapper, Mockito.times(1)).map(exampleUserB, UserDTO.class);
 		Mockito.verify(this.mockedRepo, Mockito.times(1)).findAll();}
+	
+	@Test
+	public void update() {
+		// Resources Employed
+		UserDomain exampleDomain = new UserDomain(1L, "Andi", "Berisha",null);
+		UserDTO exampleDTO = new UserDTO(1L, "Andi", "Berisha", null);
+
+		Long id = 1L;
+
+		// Rules set
+		Mockito.when(this.mockedRepo.findById(exampleDomain.getId())).thenReturn(Optional.of(exampleDomain));
+		Mockito.when(this.mockedRepo.save(Mockito.any(UserDomain.class))).thenReturn(exampleDomain);
+		Mockito.when(this.mapper.map(exampleDomain, UserDTO.class)).thenReturn(exampleDTO);
+
+		// Actions performed
+		UserDTO result = this.service.update(id, exampleDomain);
+
+		// Assertions made
+		Assertions.assertThat(result).isNotNull();
+		Assertions.assertThat(result).isEqualTo(exampleDTO);
+		Assertions.assertThat(result).usingRecursiveComparison().isEqualTo(exampleDTO);
+
+		Mockito.verify(this.mockedRepo, Mockito.times(1)).findById(id);
+		Mockito.verify(this.mockedRepo, Mockito.times(1)).save(exampleDomain);
+		Mockito.verify(this.mapper, Mockito.times(1)).map(exampleDomain, UserDTO.class);
+
+	}
 		
 		@Test
 		public void delete() {
-			// RESOURCES
+			// Resources Employed
 			UserDomain exampleUser = new UserDomain(1L, "Henry", "Hoover", null);
 
-			// RULES
+			// Rules set
 			Mockito.when(this.mockedRepo.existsById(1L)).thenReturn(false);
 
-			// ACTIONS
+			// Actions performed
 			boolean result = this.service.delete(1L);
 
-			// ASSERTIONS
+			// Assertions made
 			Assertions.assertThat(result).isTrue();
 
 			Mockito.verify(this.mockedRepo, Mockito.times(1)).deleteById(1L);

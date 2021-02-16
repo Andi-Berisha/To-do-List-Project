@@ -1,5 +1,4 @@
-
-
+let status = document.getElementById("status");
 
 document
     .querySelector("form.viewRecordUser")
@@ -40,9 +39,19 @@ function UpdateUser(data, id) {
         .then(function (data) {
             console.log('Request succeeded with JSON response', data);
             console.log("updated!");
+            msg();
 
         })
         .catch(function (error) {
             console.log('Request failed', error);
         });
+}
+
+function msg() {
+    let p = document.createElement("a");
+    p.href = "/HTML/Andi/Index.html"
+    p.innerText = "Successfully Created, click here to go back"
+    p.setAttribute("class", "success")
+
+    status.appendChild(p);
 }

@@ -27,14 +27,15 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.starterproject.persistence.domain.TaskDomain;
-
+import com.qa.starterproject.persistence.domain.UserDomain;
 import com.qa.starterproject.persistence.dtos.TaskDTO;
+import com.qa.starterproject.persistence.dtos.UserDTO;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @Sql(scripts = {"classpath:schema-test.sql","classpath:data-test.sql"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 @ActiveProfiles(profiles="test")
-class TaskControllerIntegrationTest {
+class UserControllerIntegrationTest {
 	
 	@Autowired
 	private MockMvc mock;
@@ -44,59 +45,81 @@ class TaskControllerIntegrationTest {
 	@Autowired
 	private ObjectMapper jsonifier;
 	
-	private final int ID = 1;
+	private final int ID = 4;
 	
-	private TaskDTO mapToDTO(TaskDomain model) {
-		return this.mapper.map(model, TaskDTO.class); 
+	
+	List<TaskDomain> tasksDomain = new ArrayList<>();
+	List<TaskDTO> tasks = new ArrayList<>();
+	
+	private UserDTO mapToDTO(UserDomain model) {
+		return this.mapper.map(model, UserDTO.class); 
 	}
 	
 	
-
-
+	
+	
 	@Test
 	public void read() throws Exception{
 		
 		
-		TaskDTO expectedResult = new TaskDTO(1L,"taxes",true);
+		UserDTO expectedOutcome = new UserDTO(4L, "John", "Behar",tasks);
 		// Set up the request
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
-				.request(HttpMethod.GET, "http://localhost:8081/task/read/" + ID);
+				.request(HttpMethod.GET, "http://localhost:8081/user/read/" + ID);
 		
 	// set up expectations
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
 		ResultMatcher matchContent = MockMvcResultMatchers.content()
-				.json(jsonifier.writeValueAsString(expectedResult));
+				.json(jsonifier.writeValueAsString(expectedOutcome));
 		
 	//Perform
 		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
 }
 	
 	@Test
-	public void delete() throws Exception{
+	public void readAll() throws Exception{
+		
+		
+		UserDTO OutputExpected1 = new UserDTO(1L, "Eni", "Berisha",tasks);
+		UserDTO OutputExpected2 = new UserDTO(2L, "Andi", "Berisha",tasks);
+		UserDTO OutputExpected3 = new UserDTO(3L, "Sid", "Tellalhari",tasks);
+		UserDTO OutputExpected4 = new UserDTO(4L, "John", "Behar",tasks);
+		
+		List<UserDTO>UserDTOResultList = new ArrayList<UserDTO>();
+		
+		UserDTOResultList.add(OutputExpected1);
+		UserDTOResultList.add(OutputExpected2);
+		UserDTOResultList.add(OutputExpected3);
+		UserDTOResultList.add(OutputExpected4);
 		
 		// Set up the request
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE, "http://localhost:8081/task/delete/" + ID);
+		
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET, "http://localhost:8081/user/readAll").accept(org.springframework.http.MediaType.APPLICATION_JSON);
+		
 		// set up expectations
-		ResultMatcher matchStatus = MockMvcResultMatchers.status().isNoContent();
+		ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
+		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(UserDTOResultList));
+		
 		//Perform
-		this.mock.perform(mockRequest).andExpect(matchStatus);
+		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
+		
+		
+	}
 	
-}
-	
-	
+
 	@Test
 	public void create() throws Exception{
 		
-		TaskDomain contentBody = new TaskDomain(1L, "washing up", true, null); 
-		TaskDTO expectedResult = mapToDTO(contentBody);
+		UserDomain contentBody = new UserDomain(1L, "Eni", "Berisha", tasksDomain); 
+		UserDTO expectedOutcome = mapToDTO(contentBody);
 		
 		// Set up the request
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.POST, "http://localhost:8081/task/create")
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.POST, "http://localhost:8081/user/create")
 		.contentType(MediaType.APPLICATION_JSON).content(jsonifier.writeValueAsString(contentBody)).accept(MediaType.APPLICATION_JSON);
 		
 		// set up expectations
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isCreated();
-		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedResult));
+		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedOutcome));
 		
 		//Perform
 		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
@@ -106,54 +129,37 @@ class TaskControllerIntegrationTest {
 	@Test
 	public void update() throws Exception{
 		
-		TaskDomain contentBody = new TaskDomain(1L, "wash car",true, null);
-		TaskDTO expectedResult = mapToDTO(contentBody);
+		UserDomain contentBody = new UserDomain(1L, "Nando","Palipana", tasksDomain);
+		UserDTO expectedOutput = mapToDTO(contentBody);
 		
 		// Set up the request
 		
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.PUT,"http://localhost:8081/task/update/" + ID)
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.PUT,"http://localhost:8081/user/update/" + 1)
 				.contentType(MediaType.APPLICATION_JSON).content(jsonifier.writeValueAsString(contentBody)).accept(MediaType.APPLICATION_JSON);
 		
 		// set up expectations
 		
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isAccepted();
-		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedResult));
+		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedOutput));
 		
 		//Perform
 		
 		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
 	
+			
 }
-	@Test
-	public void readAll() throws Exception{
-		
-		
-		TaskDTO OutputExpected1 = new TaskDTO(1L, "taxes",true);
-		TaskDTO OutputExpected2 = new TaskDTO(2L, "Laundry", true);
-		TaskDTO OutputExpected3 = new TaskDTO(3L, "Walk the dog", false);
-		
-		List<TaskDTO>taskDTOList = new ArrayList<TaskDTO>();
-		
-		taskDTOList.add(OutputExpected1);
-		taskDTOList.add(OutputExpected2);
-		taskDTOList.add(OutputExpected3);
 	
+	@Test
+	public void delete() throws Exception{
 		
 		// Set up the request
-		
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET, "http://localhost:8081/task/readAll").accept(org.springframework.http.MediaType.APPLICATION_JSON);
-		
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE, "http://localhost:8081/user/delete/" + ID);
 		// set up expectations
-		ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
-		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(taskDTOList));
-		
+		ResultMatcher matchStatus = MockMvcResultMatchers.status().isNoContent();
 		//Perform
-		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
-		
-		
-	}
+		this.mock.perform(mockRequest).andExpect(matchStatus);
 	
+}
 	
 	
 }
-
