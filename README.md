@@ -122,6 +122,61 @@ class UserControllerIntegrationTest {
 
 ```
 
+### User Acceptance Tests 
+User acceptance Testing is the last phase of testing where a developer can verify to see if the product works for the user.
+This is done through the use of selenium a tool which automates web browsers and tests their functionality.
+
+* **User Acceptance Test Example:**
+Here a test has been written to see if the update user function works on the front end.
+```
+	
+	@Test
+	@Order(4)
+    public void UpdateUserTest() throws InterruptedException {
+		//given that I can access my todo web app
+				driver.get(URL);
+				
+				//When: I navigate to the update user tab 
+				targ = driver.findElement(By.xpath("/html/body/nav/div/ul/li[5]/a"));
+				targ.click();
+			
+				
+				//And: I enter a User ID
+				targ = driver.findElement(By.id("userID"));
+				targ.sendKeys("1");
+				
+				
+			 
+			    //And I enter a new user name:
+				targ = driver.findElement(By.id("newUserName"));
+				targ.sendKeys("Bob");
+				
+				//And I enter a new user surname:
+				targ = driver.findElement(By.id("newUserSurname"));
+				targ.sendKeys("Geldoff");
+				
+			    //And I click update:
+							targ = driver.findElement(By.xpath("/html/body/div[1]/div/form/div/button"));
+							targ.click();
+				
+				//And: I navigate to the home page user list:
+							targ = driver.findElement(By.xpath("/html/body/div[2]/a"));
+							targ.click();
+				
+				
+				
+				//And then I get output:
+				targ = driver.findElement(By.xpath("/html/body/div[1]/div/ul/li[2]"));
+				String output = targ.getText();
+				
+				//Assertion: 
+				assertEquals("Name: Bob", output);
+
+				
+			}
+```
+
+
 ## Deployment
 1. Go to project folder and open cmd line.
 2. Type: mvn clean package
@@ -152,7 +207,7 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 *For help in [Choosing a license](https://choosealicense.com/)*
 
 ## Acknowledgments
-* **Savannah**
+* **Savannah Vaithilingam**
 * **Alan Davis**
 
 
