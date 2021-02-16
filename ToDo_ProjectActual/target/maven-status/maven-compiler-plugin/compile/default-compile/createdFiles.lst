@@ -1,0 +1,12 @@
+com\qa\starterproject\persistence\dtos\UserDTO.class
+com\qa\starterproject\persistence\domain\TaskDomain.class
+com\qa\starterproject\persistence\dtos\TaskDTO.class
+com\qa\starterproject\config\AppConfig.class
+com\qa\ToDoProjectApplication.class
+com\qa\starterproject\persistence\repos\UserRepo.class
+com\qa\starterproject\persistence\domain\UserDomain.class
+com\qa\starterproject\services\TaskService.class
+com\qa\starterproject\rest\UserController.class
+com\qa\starterproject\rest\TaskController.class
+com\qa\starterproject\services\UserService.class
+com\qa\starterproject\persistence\repos\TaskRepo.class

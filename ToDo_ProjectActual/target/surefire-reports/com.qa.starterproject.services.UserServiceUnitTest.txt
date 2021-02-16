@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.qa.starterproject.services.UserServiceUnitTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.666 s - in com.qa.starterproject.services.UserServiceUnitTest

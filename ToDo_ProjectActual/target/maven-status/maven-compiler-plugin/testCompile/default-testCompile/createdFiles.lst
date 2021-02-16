@@ -1,0 +1,6 @@
+com\qa\starterproject\rest\TaskControllerIntegrationTest.class
+com\qa\starterproject\rest\UserControllerIntegrationTest.class
+com\qa\starterproject\services\UserServiceUnitTest.class
+com\qa\starterproject\services\TaskServiceUnitTest.class
+com\qa\ToDoProjectApplicationTests.class
+com\qa\starterproject\Selenium\HomePageTest.class
