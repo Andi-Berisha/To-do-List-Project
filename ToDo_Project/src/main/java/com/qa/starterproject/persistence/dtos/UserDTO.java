@@ -2,7 +2,8 @@ package com.qa.starterproject.persistence.dtos;
 
 import java.util.List;
 
-import com.qa.starterproject.persistence.domain.TaskDomain;
+
+
 
 public class UserDTO {
 
@@ -12,15 +13,14 @@ public class UserDTO {
 
 	private String user_surname;
 
-//	private String user_password; protected value
 
-	private List<TaskDomain> tasks;
+	private List<TaskDTO> tasks;
 
 	public UserDTO() {
 		super();
-	}
+	} 
 
-	public UserDTO(Long id, String user_name, String user_surname, List<TaskDomain> tasks) {
+	public UserDTO(Long id, String user_name, String user_surname, List<TaskDTO> tasks) {
 		super();
 		this.id = id;
 		this.user_name = user_name;
@@ -52,12 +52,13 @@ public class UserDTO {
 		this.user_surname = user_surname;
 	}
 
-	public List<TaskDomain> getTasks() {
+	public List<TaskDTO> getTasks() {
 		return tasks;
 	}
 
-	public void setTasks(List<TaskDomain> tasks) {
+	public void setTasks(List<TaskDTO> tasks) {
 		this.tasks = tasks;
 	}
+
 
 }

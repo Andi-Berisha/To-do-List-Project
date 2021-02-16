@@ -67,54 +67,7 @@ public class TaskDomain {
 		User = user;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((User == null) ? 0 : User.hashCode());
-		result = prime * result + ((hasTaskBeenCompletedCheck == null) ? 0 : hasTaskBeenCompletedCheck.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((task_name == null) ? 0 : task_name.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		TaskDomain other = (TaskDomain) obj;
-		if (User == null) {
-			if (other.User != null)
-				return false;
-		} else if (!User.equals(other.User))
-			return false;
-		if (hasTaskBeenCompletedCheck == null) {
-			if (other.hasTaskBeenCompletedCheck != null)
-				return false;
-		} else if (!hasTaskBeenCompletedCheck.equals(other.hasTaskBeenCompletedCheck))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (task_name == null) {
-			if (other.task_name != null)
-				return false;
-		} else if (!task_name.equals(other.task_name))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "TaskDomain [id=" + id + ", task_name=" + task_name + ", hasTaskBeenCompletedCheck="
-				+ hasTaskBeenCompletedCheck + ", User=" + User + "]";
-	}
+	
 	
 	
 
